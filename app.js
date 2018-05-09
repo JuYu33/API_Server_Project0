@@ -4,16 +4,36 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+let myData1 = {};
+const fetch = require('node-fetch');
+// console.log("fetch?");
+// fetch('http://api.sportradar.us/nba/trial/v4/en/games/2018/05/07/schedule.json?api_key=qcpkrzg2e8ajwk4ssshrrr6d')
+// fetch('https://api.github.com/search/repositories?q=stars:>1+language:all&sort=stars&order=desc&type=Repositories')
+// // fetch('https://api.github.com/users/github')
+//   .then(response => {
+//     return response.json();
+//   })
+//   .then(valu => {
+//     console.log(valu);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   }
+// )
+
 const productRoutes = require('./api/routes/products');
 const ordersRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/user');
 
-const mongoConnect1 = `mongodb://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PW}@node-rest-test-shard-00-00-coz1f.mongodb.net:27017,node-rest-test-shard-00-01-coz1f.mongodb.net:27017,node-rest-test-shard-00-02-coz1f.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-test-shard-0&authSource=admin`;
-//const mongoConnect2 = 'mongodb://'+ process.env.MONGO_ATLAS_USER + ':' + process.env.MONGO_ATLAS_PW + '@node-rest-test-shard-00-00-coz1f.mongodb.net:27017,node-rest-test-shard-00-01-coz1f.mongodb.net:27017,node-rest-test-shard-00-02-coz1f.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-test-shard-0&authSource=admin';
+const mongoConnect1 = 'mongodb://node-rest-test-shard-00-00-coz1f.mongodb.net:27017,node-rest-test-shard-00-01-coz1f.mongodb.net:27017,node-rest-test-shard-00-02-coz1f.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-test-shard-0&authSource=admin';
 
 mongoose.connect(
   mongoConnect1,  
   {
+    auth: {
+      user: process.env.MONGO_ATLAS_USER,
+      password: process.env.MONGO_ATLAS_PW
+    }
     //useMongoClient: true //no longer required in mongoose version 5.x
   }
 );
