@@ -1,11 +1,9 @@
-//define how products should look
-
-
 const mongoose = require('mongoose');
 
 const gamesSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  name: { type: String, required: true},
+  date: {type: String},
+  games: { type: Array}
 });
 
 module.exports = mongoose.model('Games', gamesSchema);
