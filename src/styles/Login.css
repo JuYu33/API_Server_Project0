@@ -1,0 +1,17 @@
+.loginWindow {
+  border-radius: 14px;
+  margin: 0 20px 0 20px;
+  height: 229px;
+  width: auto;
+}
+
+#formEmail {
+  clear: both;
+  margin-bottom: 5px;
+}
+
+#formPassword {
+  clear: both;
+  margin-bottom: 15px;
+}
+
