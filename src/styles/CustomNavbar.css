@@ -1,5 +1,4 @@
 
-
 nav.navbar, .navbar-default {
   background-color: #2892D7 !important;
 }
@@ -10,7 +9,12 @@ nav.navbar, .navbar-default {
   border-radius: 0;
 }
 
+.moveToCorner {
+  max-height: 64px;
+  box-shadow: white;
+}
 .navbar-default .navbar-nav>li>a {
+  padding-bottom: 10px;
   color: white;
 }
 

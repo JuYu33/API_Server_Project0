@@ -52,7 +52,7 @@ export default class Login extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   User
                 </Col>
-                <Col sm={5} md={2} lg={2}>
+                <Col sm={5} md={6} lg={6}>
                   <FormControl
                     name="username"
                     type="text" 
@@ -69,7 +69,7 @@ export default class Login extends Component {
                 <Col componentClass={ControlLabel} sm={2}>
                   Password
                 </Col>
-                <Col sm={5} md={2} lg={2}>
+                <Col sm={5} md={6} lg={6}>
                   <FormControl
                     name="por"
                     type="password"

@@ -7,7 +7,8 @@ import {
 import FieldGroup from './FieldGroup';
 import "../styles/NewAR.css";
 
-function AuditOnly() {
+function AuditOnly(props) {
+  console.log(props);
   return (
     <div>
       <FormGroup controlId="formObsAO">
@@ -57,45 +58,49 @@ class FormInstance extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      type: "bingo",
+      audit: {}
     }
     //TODO: Need to receive props in order to show audit, complaint, rma
   }
   
   render() {
     const myData = "temporary";
-    const isAuditor = {};
+    const isAuditor = this.props.isAuditor
+      ? <AuditOnly/>
+      : "Auditor Only";
     const {type} = this.state;
 
     return (
       <form onSubmit={(e)=>this.props.didSubmit(myData, e)}>
-        <Row> 
-          <Col xs={4}>
-            <FormGroup controlId="arNum">
-              <ControlLabel>AR Number</ControlLabel>
-              <FormControl.Static>TBD</FormControl.Static>
-            </FormGroup>
-          </Col>
-  
-          <Col xs={3}>
-            <FormGroup controlId="arNum">
-              <ControlLabel>Status</ControlLabel>
-              <FormControl.Static>Open</FormControl.Static>
-            </FormGroup>
-          </Col>
-  
-          <Col xs={5}>
-            <FormGroup controlId="typeSelect">
-              <ControlLabel>Type</ControlLabel> 
-              <FormControl componentClass="select" placeholder="Dupe">
-                <option value="temp0">** Please Select **</option>
-                <option value="temp1">AR</option>
-                <option value="temp2">RMA</option>
-              </FormControl>
-            </FormGroup>
-          </Col>
-        </Row>
-  
+
+        <Col xs={3}>
+          <FormGroup controlId="arNum">
+            <ControlLabel>AR Number</ControlLabel>
+            <FormControl.Static>TBD</FormControl.Static>
+          </FormGroup>
+        </Col>
+
+        <Col xs={3}>
+          <FormGroup controlId="arNum">
+            <ControlLabel>Status</ControlLabel>
+            <FormControl.Static>Open</FormControl.Static>
+          </FormGroup>
+        </Col>
+
+        <Col xs={3}>
+          <FormGroup controlId="typeSelect">
+            <ControlLabel>Type</ControlLabel> 
+            <FormControl componentClass="select" placeholder="Dupe">
+              <option value="temp0">** Please Select **</option>
+              <option value="temp1">AR</option>
+              <option value="temp2">RMA</option>
+            </FormControl>
+          </FormGroup>
+        </Col>
+        
+        <Row className="w-100"/>
+        
         <Col xs={12}>
           <FormGroup controlId="customer">
             <ControlLabel>Customer</ControlLabel>
@@ -108,7 +113,7 @@ class FormInstance extends Component {
           </FormGroup>
         </Col>
   
-        <Col xs={12}>
+        <Col xs={6}>
           <FormGroup controlId="projNum">
             <ControlLabel>Project Number</ControlLabel>
             <FormControl componentClass="select" placeholder="Boop">
@@ -118,31 +123,31 @@ class FormInstance extends Component {
             </FormControl>
           </FormGroup>
         </Col>
-  
-        <Col xs={12}>
-          <Col xs={4}>
-            <FieldGroup
-              id="formAssembly"
-              type="text"
-              label="Assembly Number"
-              placeholder="####-###"
-            />
-          </Col>
-          <Col xs={4}>
-            <FieldGroup 
-              id="formPartNum" 
-              label="Part Number" 
-              type="text" 
-            />
-          </Col>
-          <Col xs={4}>
-            <FieldGroup 
-              id="formSerialNum" 
-              label="Serial Number" 
-              type="text" 
-            />
-          </Col>
+        <Row className="w-100"/>
+ 
+        <Col xs={4}>
+          <FieldGroup
+            id="formAssembly"
+            type="text"
+            label="Assembly Number"
+            placeholder="####-###"
+          />
         </Col>
+        <Col xs={4}>
+          <FieldGroup 
+            id="formPartNum" 
+            label="Part Number" 
+            type="text" 
+          />
+        </Col>
+        <Col xs={4}>
+          <FieldGroup 
+            id="formSerialNum" 
+            label="Serial Number" 
+            type="text" 
+          />
+        </Col>
+
   
         <Col xs={12}>
           <FormGroup controlId="customer">
@@ -156,48 +161,42 @@ class FormInstance extends Component {
           </FormGroup>
         </Col>
   
-        <Col xs={12}>
-          <Col xs={6}>
-            <FieldGroup 
-              id="formEngApprov" 
-              label="Eng Approv" 
-              type="text" 
-            />
-          </Col>
-  
-          <Col xs={6}>
-            <FieldGroup 
-              id="formQual" 
-              label="QA"
-              type="text" 
-            />
-          </Col>
+
+        <Col xs={6}>
+          <FieldGroup 
+            id="formEngApprov" 
+            label="Eng Approv" 
+            type="text" 
+          />
         </Col>
-  
-        <Col xs={12}>
-          <Col xs={6}> 
-            <FieldGroup 
-              id="formDate"
-              label="Date" 
-              type="date" 
-            />
-          </Col>
-          <Col xs={6}> 
-            <FieldGroup 
-              id="formECD"
-              label="ECD" 
-              type="date" 
-            />
-          </Col>
+
+        <Col xs={6}>
+          <FieldGroup 
+            id="formQual" 
+            label="QA"
+            type="text" 
+          />
         </Col>
-  
+
+        <Col xs={6}> 
+          <FieldGroup 
+            id="formDate"
+            label="Entry Date" 
+            type="date" 
+          />
+        </Col>
+        <Col xs={6}> 
+          <FieldGroup 
+            id="formECD"
+            label="ECD" 
+            type="date" 
+          />
+        </Col>
   
         <FormGroup controlId="formProblem">
           <ControlLabel>Problem</ControlLabel>
           <FormControl componentClass="textarea" placeholder="Describe the issue" />
         </FormGroup>
-  
-        
   
         <FormGroup>
           <ControlLabel>Severity</ControlLabel>
@@ -254,14 +253,14 @@ class FormInstance extends Component {
           <FormControl componentClass="textarea" placeholder="impact" />
         </FormGroup>
 
-        <AuditOnly/>
-        <ComplaintOnly/>
-        <RMAonly/>
+        <AuditOnly fromData={this.state.audit}/>
+        {/* <ComplaintOnly/> */}
+        {/* <RMAonly/> */}
   
 
         <Button type="submit">Submit</Button>
-        <Button type="button" onClick={(e)=>this.props.didClick(myData, e)}>Cancel</Button>
-        <Button type="button" onClick={(e)=>this.props.didClick2(myData, e)}>Save</Button>
+        <Button type="button" onClick={(e)=>this.props.didClick(myData, "cancel", e)}>Cancel</Button>
+        <Button type="button" onClick={(e)=>this.props.didClick(myData, "save", e)}>Save</Button>
       </form>
   )}
 };
@@ -277,23 +276,15 @@ export default class NewAR extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleClick2 = this.handleClick2.bind(this);
   }
 
   componentDidMount(e) {
 
   }
 
-  handleClick(reset1, e) {
+  handleClick(reset1, type, e) {
     e.preventDefault();
-
-    console.log("Cancel");
-  }
-
-  handleClick2(reset1, e) {
-    e.preventDefault();
-
-    console.log("Saving");
+    console.log("Type: ", type);
   }
 
   handleSubmit(submitData, e) {
@@ -302,18 +293,17 @@ export default class NewAR extends Component {
   }
 
   render() {
-    console.log("Props are: ", this.props);
-    console.log("User? : ", this.props.user);
     return (
       <div>
         <Grid>
-          <h2>Anomaly Report</h2>
+          <h2 className="text-center">Anomaly Report</h2>
           <br/>
           <FormInstance 
             test="testVal" 
             didSubmit={this.handleSubmit}
             didClick={this.handleClick}
             didClick2={this.handleClick2}
+            isAuditor={this.props.isAuditor}
           />
         </Grid>
       </div>

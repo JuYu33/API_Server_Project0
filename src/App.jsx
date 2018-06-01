@@ -27,13 +27,10 @@ const fakeAuth = {
   }
 }
 
-const PrivateRoute = withRouter(({ component: Component, ...rest}) => {
-  // console.log("Outer Props: ", props);
+const PrivateRoute =  withRouter(({ component: Component,logState, ...rest}) => {
   return <Route {...rest} render={(props) => {
-    console.log("Inner props: ", props);
-    console.log("logstate: ", props.logState);
-    return fakeAuth.isAuthenticated === true
-      ? <Component {...props}/>
+    return logState
+      ? <Component {...props} loggedIn={logState}/>
       : <Redirect {...props} to={{
         pathname: '/login',
         state: { from: props.location }
@@ -46,7 +43,7 @@ class App extends Component {
     super(props);
     this.state = {
       // isLoggedin : false
-      isLoggedin : false,
+      isLoggedin : true,
       redirectToReferrer: false,
       isAuditor: false
     };
@@ -85,15 +82,20 @@ class App extends Component {
         <div>
           <CustomNavbar loggedIn={this.state.isLoggedin} logout={this.handleLogOut}/>
             {/* <Route render={() => (<div> Sorry, this page does not exist. </div>)} /> */}
-            <Route path='/' exact component={Home} />
-            <PrivateRoute  path='/newar'
-              // render={(props) => (
-              //   <NewAR 
-              //     {...props} 
-                  logState={this.state.isLoggedin} 
-              //   />
-              // )}
+            {/* <Route path='/' exact component={Home} /> */}
+            {/* <Route path='/about' component={About}/> */}
+
+            <PrivateRoute  exact path='/'
+              component={Home}
+              logState={this.state.isLoggedin}
+            />
+            <PrivateRoute path='/about'
+              component={About}
+              logState={this.state.isLoggedin}
+            />
+            <PrivateRoute path='/newar'
               component={NewAR}
+              logState={this.state.isLoggedin}
             />
             <Route path='/login' render={(props) => (
               <Login {...props} 
@@ -102,7 +104,6 @@ class App extends Component {
               />
               )}
             />
-            <Route path='/about' component={About}/>
         </div>
       </Router>
     );

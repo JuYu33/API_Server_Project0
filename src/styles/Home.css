@@ -1,9 +1,14 @@
 .jumbotron {
-  margin-bottom: 4em;
+  margin-bottom: 10px;
+  
 }
 
-.person-wrapper {
-  margin-bottom: 2em;
+.marginRight {
+  margin-right: 15px;
+}
+
+.form-group {
+  margin-bottom: 5px;
 }
 
 .profile-pic {
@@ -15,6 +20,10 @@
   border: none;
   border-radius: 0;
   background-color: #2892D7;
+}
+
+.homeTitle {
+  margin-top: -10px;
 }
 
 h3 {

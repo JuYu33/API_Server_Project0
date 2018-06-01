@@ -32,11 +32,11 @@
   height: 21px;
 }
 
-.moveDown {
+.moveDown20 {
   margin-top: 20px;
 
 }
 
-.moveUp {
-  margin-top: -20px;
+.moveDown10 {
+  margin-top: 8px;
 }
