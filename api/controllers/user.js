@@ -64,9 +64,7 @@ exports.user_login = (req,res,err) => {
             process.env.MY_JWT_KEY,
             {
               expiresIn: '1h'
-            },
-
-          )
+            })
             return res.status(200).json({
               message: "Auth successful",
               token: jToken,
