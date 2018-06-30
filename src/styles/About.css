@@ -23,12 +23,12 @@
   padding: 0;
 }
 
-#shrink.form-control {
+.shrink.form-control {
   height: 50%;
   padding: 0;
 }
 
-#smallHeight.form-control {
+.smallHeight.form-control {
   height: 21px;
 }
 

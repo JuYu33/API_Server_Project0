@@ -1,0 +1,20 @@
+.grid-wrapper {
+  display:grid;
+  grid-template-rows: [row1-start] 140px [row1-end] auto;
+  grid-template-areas: 
+  "title1"
+  "list1"
+}
+
+.grid-title1 {
+  /* padding: 1px 0px 5px 8px; */
+  grid-area: title1;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.gray-out {
+  color: lightgrey;
+  
+}

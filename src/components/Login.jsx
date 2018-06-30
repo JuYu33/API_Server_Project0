@@ -13,7 +13,9 @@ export default class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      por: ''
+      password: '',
+      isAdmin: false,
+      isAuditor: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,10 +29,10 @@ export default class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.onLogIn(this.state.username, this.state.por, e);
+    this.props.onLogIn(this.state.username, this.state.password, e);
     this.setState({
       username: '',
-      por: ''
+      password: ''
     });
   }
   render() {
@@ -44,19 +46,19 @@ export default class Login extends Component {
 
     return (
       <div>
-
           <Jumbotron className="loginWindow">
             <Form onSubmit={this.handleSubmit}>
               
               <FormGroup controlId="formEmail">
                 <Col componentClass={ControlLabel} sm={2}>
-                  User
+                  Username
                 </Col>
                 <Col sm={5} md={6} lg={6}>
                   <FormControl
                     name="username"
                     type="text" 
                     placeholder="Username" 
+                    autoComplete="Off"
                     value={this.state.username}
                     onChange={this.handleChange}
                   />
@@ -71,15 +73,14 @@ export default class Login extends Component {
                 </Col>
                 <Col sm={5} md={6} lg={6}>
                   <FormControl
-                    name="por"
+                    name="password"
                     type="password"
                     placeholder="Password" 
-                    value={this.state.por}
+                    value={this.state.password}
                     onChange={this.handleChange}
                   />
                 </Col>
               </FormGroup>
-
               <FormGroup>
                 <Col smOffset={2} sm={10}>
                   <Button type="submit">Log in</Button>
@@ -87,7 +88,7 @@ export default class Login extends Component {
               </FormGroup>
             </Form>
           </Jumbotron>
-
+          <p>{this.props.message}</p>
       </div>
     )
   }

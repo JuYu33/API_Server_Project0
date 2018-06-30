@@ -5,11 +5,31 @@ import '../styles/CustomNavbar.css'
 
 export default class CustomNavbar extends Component {
   render() {
-    const logout = this.props.loggedIn 
-      ?   <Button  onClick={this.props.logout}>
-            Log Out
-          </Button>
-      : null; 
+    const toggle = this.props.loggedIn ? <Navbar.Toggle/> : null;
+    const adminLink = this.props.isAdmin
+      ? (<NavItem eventKey={2} className="moveDown10" componentClass={Link} href='/' to="/admin">
+          Admin Powers
+        </NavItem>)
+      : null;
+
+    const navLinks = this.props.loggedIn
+      ? (<Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem eventKey={1} className="moveDown10" componentClass={Link} href='/' to="/">
+              Home
+            </NavItem>
+            {adminLink}
+            <NavItem eventKey={3} className="moveDown10" componentClass={Link} href='/' to="/newar">
+              New AR
+            </NavItem>
+            <NavItem>
+            <Button  onClick={this.props.logout}>
+              Log Out
+            </Button>
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>)
+      : null
     return (
       <Navbar default collapseOnSelect>
         <Navbar.Header>
@@ -18,25 +38,11 @@ export default class CustomNavbar extends Component {
             </Link>
 
             
-          <Navbar.Toggle/>
+            {/* <Navbar.Toggle/> */}
+            {toggle}
 
         </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
-            <NavItem eventKey={1} className="moveDown10" componentClass={Link} href='/' to="/">
-              Home
-            </NavItem>
-            <NavItem eventKey={2} className="moveDown10" componentClass={Link} href='/' to="/about">
-              About
-            </NavItem>
-            <NavItem eventKey={3} className="moveDown10" componentClass={Link} href='/' to="/newar">
-              New AR
-            </NavItem>
-            <NavItem>
-              {logout}
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
+        {navLinks}
       </Navbar>
     )
   }

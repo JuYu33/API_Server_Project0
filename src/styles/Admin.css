@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2892d7;
+}
+
+p {
+  color: grey;
+  font-weight: 300;
+}
+
+
+.flex-list-container {
+  /* border: 1px solid blue; */
+  display: inline-flex;
+  flex-direction: row;
+  margin: 4px;
+  max-height: 200px;
+  width: 500px;
+}
+
+
+.flex-one-third{
+  display: flex;
+  /* border: 1px solid red; */
+  align-content: center;
+  width: 33%;
+}
+
+.grid-one-third {
+  display: grid;
+  margin-top: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+
+
+.grid-wrapper {
+  display:grid;
+  grid-template-rows: [row1-start] 30px [row1-end] auto;
+  grid-template-areas: 
+  "title1"
+  "list1"
+}
+
+.grid-title1 {
+  /* padding: 1px 0px 5px 8px; */
+  grid-area: title1;
+  align-items: center;
+  justify-self: center;
+  align-self: center;
+}
+
+.grid-list1 {
+  grid-area: list1;
+  border: 1px solid gray;
+  border-radius: 5px;
+  max-height: 168px;
+  width: 90%;
+  justify-self: center;
+  justify-items: center;
+  overflow: scroll;
+}
+
+.grid-listitems1 {
+  padding: 1px 1px 1px 15px;
+}
+
+.grid-listitems1:hover{
+  cursor: pointer;
+  background-color: lightgrey;
+}
+
+.grid-listitems1:global(.active) {
+  background-color: blue;
+}
+
+.grid-forms {
+  display: grid;
+
+}
+
+.grid-users {
+  display: grid;
+
+}
+
+.limit-width {
+  width: 52%;
+}
+
+.move-down {
+  margin-top: 40px;
+}
+
+.gimme-space {
+  margin: 10px;
+}
